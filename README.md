@@ -13,15 +13,23 @@ A Python-based WebSocket server for processing audio streams in real time. This 
 ```
 audio_processor/
 ├── client/
-│   ├── client.py          # Example client to send audio chunks
-│   └── run_clients.sh     # Script to run multiple clients
-├── server.py              # WebSocket server handling clients and processing
-├── processor.py           # Audio processing logic (mock transcription)
-├── requirements.txt       # Python dependencies
-├── pyproject.toml         # Project metadata and dependencies
-├── uv.lock               # Locked dependencies for reproducible builds
-├── Dockerfile            # Docker image definition
-└── .dockerignore         # Docker ignore file
+│   ├── client.py            # Example client to send audio chunks
+├── scripts/
+│   └── run_clients.sh       # Script to run multiple clients
+├── src/
+│   ├── __init__.py
+│   ├── processor.py         # Audio processing logic (mock transcription)
+│   └── server.py            # WebSocket server handling clients and processing
+├── test/
+│   ├── __init__.py
+│   └── test_processor.py    # Unit tests for audio processor
+├── requirements.txt         # Python dependencies
+├── pyproject.toml           # Project metadata and dependencies
+├── uv.lock                  # Locked dependencies for reproducible builds
+├── Dockerfile               # Docker image definition
+└── .github/
+    └── workflows/
+        └── ci.yml           # CI workflow
 ```
 
 ## Requirements
@@ -48,9 +56,9 @@ audio_processor/
 
 ### Run the Server
 ```bash
-uv run server.py
+uv run src/server.py
 # or
-python server.py
+python src/server.py
 ```
 
 ### Run the Example Client
@@ -64,9 +72,10 @@ python client/client.py
 ### Run Multiple Clients
 Use the provided script to run multiple clients simultaneously:
 ```bash
-chmod +x client/run_clients.sh
-./client/run_clients.sh
+chmod +x scripts/run_clients.sh
+./scripts/run_clients.sh
 ```
+This will prompt for the number of clients to start, and logs will be saved in the `client/` directory.
 
 ### Using Docker
 Build and run the Docker image:
@@ -84,3 +93,23 @@ docker run -p 8765:8765 audio-processor
 
 ## Development
 This project uses `uv` for dependency management with a lockfile (`uv.lock`) for reproducible builds. The Docker image is optimized for production deployment with bytecode compilation enabled.
+
+## Testing
+
+This project uses [pytest](https://pytest.org/) for unit testing.
+
+To run the tests, first ensure you have pytest installed:
+
+```bash
+uv pip install pytest
+# or
+pip install pytest
+```
+
+Then run the tests from the project root:
+
+```bash
+pytest
+```
+
+This will automatically discover and run all tests, including the sample test in `test/test_processor.py`.

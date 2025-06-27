@@ -32,4 +32,4 @@ ENTRYPOINT []
 EXPOSE 8765
 
 # Run the websocket server
-CMD ["uv", "run", "server.py"]
+CMD ["uv", "run", "src/server.py"]
