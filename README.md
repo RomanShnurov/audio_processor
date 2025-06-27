@@ -1,5 +1,7 @@
 # Audio Processor
 
+[![CI](https://github.com/RomanShnurov/audio_processor/actions/workflows/ci.yml/badge.svg)](https://github.com/RomanShnurov/audio_processor/actions/workflows/ci.yml)
+
 A Python-based WebSocket server for processing audio streams in real time. This project demonstrates a simple architecture for receiving audio chunks from clients, processing them (mock transcription), and sending results back asynchronously.
 
 ## Features
